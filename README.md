@@ -1,6 +1,7 @@
 # **Esercizio: React Movie Filter**
 
 ## Consegna:
+
 Create un nuovo progetto React e implementate un sistema di filtro per una lista di film in base al genere.
 
 Dovrete utilizzare lo stato e useEffect per gestire il filtraggio dinamico.
