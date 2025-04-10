@@ -15,16 +15,20 @@ function App() {
   const [searchCategory, setSearchCategory] = useState('');
   const [searchTitle, setSearchTitle] = useState('');
   const [newMovie, setNewMovie] = useState('');
+  const [newCategory, setNewCategory] = useState('');
 
   const addMovie = event => {
     event.preventDefault();
-    const newId = movies.at(-1).id
-    const newMovie = {
-      id: newId,
-      title: null,
-      genre: null
+    if (newMovie !== '') {
+      const newId = movie.length > 0 ? filteredMovies.at(-1)?.id + 1 : 1;
+      const newMovies = {
+        id: newId,
+        title: newMovie,
+        genre: newCategory
+      }
+      let addedMovie = [...movie, newMovies]
+      setFilteredMovies(addedMovie);
     }
-    console.log(newMovie)
   }
 
   useEffect(() => {
@@ -78,6 +82,13 @@ function App() {
               placeholder="Inserisci nuovo film"
               value={newMovie}
             />
+            <select value={newCategory} onChange={e => setNewCategory(e.target.value)}>
+              <option value="">---</option>
+              <option>Fantascienza</option>
+              <option>Thriller</option>
+              <option>Romantico</option>
+              <option>Azione</option>
+            </select>
           </div>
           <button>Aggiungi</button>
         </section>
