@@ -16,27 +16,21 @@ function App() {
   const [searchTitle, setSearchTitle] = useState('');
 
   useEffect(() => {
+    let movieArray = movie;
     if (searchCategory !== '') {
-      const updatedMovies = movie.filter(element => element.genre === searchCategory)
-      setFilteredMovies(updatedMovies);
-    } else {
-      setFilteredMovies(movie);
+      movieArray = movieArray.filter(element => element.genre === searchCategory)
     }
-  }, [searchCategory])
-
-  useEffect(() => {
     if (searchTitle !== '') {
       let checked = [];
-      movie.forEach(element => {
+      movieArray.forEach(element => {
         if (element.title.includes(searchTitle)) {
           checked.push(element)
         }
-      });
-      setFilteredMovies(checked);
-    } else {
-      setFilteredMovies(movie);
+      })
+      movieArray = checked;
     }
-  }, [searchTitle])
+    setFilteredMovies(movieArray)
+  }, [searchCategory, searchTitle])
 
   return (
     <>
