@@ -14,6 +14,17 @@ function App() {
   const [filteredMovies, setFilteredMovies] = useState(movie);
   const [searchCategory, setSearchCategory] = useState('');
   const [searchTitle, setSearchTitle] = useState('');
+  const [newMovie, setNewMovie] = useState('');
+
+  const addMovie = event => {
+    event.preventDefault();
+    const newId = movies.at(-1).id
+    const newMovie = {
+      id: newId,
+      title: null,
+      genre: null
+    }
+  }
 
   useEffect(() => {
     let movieArray = movie;
@@ -34,41 +45,52 @@ function App() {
 
   return (
     <>
-      <h1>Movies Filter</h1>
-      <hr />
-      <section>
-        <h2>Cerca Articoli</h2>
-        <label>Cerca per genere</label>
-        <div>
-          <select value={searchCategory} onChange={e => setSearchCategory(e.target.value)}>
-            <option value="">---</option>
-            <option>Fantascienza</option>
-            <option>Thriller</option>
-            <option>Romantico</option>
-            <option>Azione</option>
-          </select>
-        </div>
-        <label>Inserisci Titolo</label>
-        <div>
-          <input type="text"
-            placeholder='Inserisci titolo'
-            value={searchTitle}
-            onChange={e => setSearchTitle(e.target.value)}
-          />
-        </div>
-
-      </section>
-      <hr />
-      <section>
-        <h2>Lista Film</h2>
-        {filteredMovies.map(element =>
-          <article key={element.id}>
-            <h3>Nome:{element.title}</h3>
-            <h4>Genere:{element.genre}</h4>
-          </article>
-        )}
-      </section>
-      <hr />
+      <form onSubmit={addMovie}>
+        <h1>Movies Filter</h1>
+        <hr />
+        <section>
+          <h2>Cerca Articoli</h2>
+          <label>Cerca per genere</label>
+          <div>
+            <select value={searchCategory} onChange={e => setSearchCategory(e.target.value)}>
+              <option value="">---</option>
+              <option>Fantascienza</option>
+              <option>Thriller</option>
+              <option>Romantico</option>
+              <option>Azione</option>
+            </select>
+          </div>
+          <label>Inserisci Titolo</label>
+          <div>
+            <input type="text"
+              placeholder='Inserisci titolo'
+              value={searchTitle}
+              onChange={e => setSearchTitle(e.target.value)}
+            />
+          </div>
+          <hr />
+          <label>Inserisci nuovo film</label>
+          <div>
+            <input type="text"
+              onChange={e => { setNewMovie(e.target.value) }}
+              placeholder="Inserisci nuovo film"
+              value={newMovie}
+            />
+          </div>
+          <button>Aggiungi</button>
+        </section>
+        <hr />
+        <section>
+          <h2>Lista Film</h2>
+          {filteredMovies.map(element =>
+            <article key={element.id}>
+              <h3>Nome:{element.title}</h3>
+              <h4>Genere:{element.genre}</h4>
+            </article>
+          )}
+        </section>
+        <hr />
+      </form>
     </>
   )
 }
