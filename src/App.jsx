@@ -9,22 +9,19 @@ const movies = [
   { id: 6, title: 'Pulp Fiction', genre: 'Thriller' },
 ];
 
-
 function App() {
   const [movie, setMovie] = useState(movies);
-  const [searchCateogory, setSearchCategory] = useState('');
+  const [filteredMovies, setFilteredMovies] = useState(movie);
+  const [searchCategory, setSearchCategory] = useState('');
 
   useEffect(() => {
-
-    let updatedMovies = movie;
-
-    if (searchCateogory !== '') {
-      updatedMovies = updatedMovies.filter(element => element.genre === searchCateogory);
+    if (searchCategory !== '') {
+      const updatedMovies = movie.filter(element => element.genre === searchCategory)
+      setFilteredMovies(updatedMovies);
+    } else {
+      setFilteredMovies(movie);
     }
-
-    setMovie(updatedMovies);
-
-  }, [searchCateogory, movies])
+  }, [searchCategory])
 
   return (
     <>
@@ -34,7 +31,7 @@ function App() {
         <h2>Cerca Articoli</h2>
         <label>Cerca per genere</label>
         <div>
-          <select value={searchCateogory} onChange={e => setSearchCategory(e.target.value)}>
+          <select value={searchCategory} onChange={e => setSearchCategory(e.target.value)}>
             <option value="">---</option>
             <option>Fantascienza</option>
             <option>Thriller</option>
@@ -46,7 +43,7 @@ function App() {
       <hr />
       <section>
         <h2>Lista Film</h2>
-        {movie.map(element =>
+        {filteredMovies.map(element =>
           <article key={element.id}>
             <h3>Nome:{element.title}</h3>
             <h4>Genere:{element.genre}</h4>
