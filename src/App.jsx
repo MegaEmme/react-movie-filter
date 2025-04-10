@@ -13,15 +13,26 @@ function App() {
   const [movie, setMovie] = useState(movies);
   const [filteredMovies, setFilteredMovies] = useState(movie);
   const [searchCategory, setSearchCategory] = useState('');
+  const [searchTitle, setSearchTitle] = useState('');
 
   useEffect(() => {
-    if (searchCategory !== '') {
+    if (searchCategory !== '' && searchTitle !== '') {
       const updatedMovies = movie.filter(element => element.genre === searchCategory)
       setFilteredMovies(updatedMovies);
     } else {
       setFilteredMovies(movie);
     }
+
   }, [searchCategory])
+
+  useEffect(() => {
+    if (searchTitle !== '') {
+      const inputMovies = movie.filter(element => element.title === searchTitle)
+      setFilteredMovies(inputMovies);
+    } else {
+      setFilteredMovies(movie);
+    }
+  }, [searchTitle])
 
   return (
     <>
@@ -39,6 +50,15 @@ function App() {
             <option>Azione</option>
           </select>
         </div>
+        <label>Inserisci Titolo</label>
+        <div>
+          <input type="text"
+            placeholder='Inserisci titolo'
+            value={searchTitle}
+            onChange={e => setSearchTitle(e.target.value)}
+          />
+        </div>
+
       </section>
       <hr />
       <section>
