@@ -24,6 +24,7 @@ function App() {
       title: null,
       genre: null
     }
+    console.log(newMovie)
   }
 
   useEffect(() => {
@@ -60,7 +61,7 @@ function App() {
               <option>Azione</option>
             </select>
           </div>
-          <label>Inserisci Titolo</label>
+          <label>Cerca per Titolo</label>
           <div>
             <input type="text"
               placeholder='Inserisci titolo'
@@ -69,6 +70,7 @@ function App() {
             />
           </div>
           <hr />
+          <h2>Aggiungi Articoli</h2>
           <label>Inserisci nuovo film</label>
           <div>
             <input type="text"
