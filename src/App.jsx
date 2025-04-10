@@ -16,19 +16,23 @@ function App() {
   const [searchTitle, setSearchTitle] = useState('');
 
   useEffect(() => {
-    if (searchCategory !== '' && searchTitle !== '') {
+    if (searchCategory !== '') {
       const updatedMovies = movie.filter(element => element.genre === searchCategory)
       setFilteredMovies(updatedMovies);
     } else {
       setFilteredMovies(movie);
     }
-
   }, [searchCategory])
 
   useEffect(() => {
     if (searchTitle !== '') {
-      const inputMovies = movie.filter(element => element.title === searchTitle)
-      setFilteredMovies(inputMovies);
+      let checked = [];
+      movie.forEach(element => {
+        if (element.title.includes(searchTitle)) {
+          checked.push(element)
+        }
+      });
+      setFilteredMovies(checked);
     } else {
       setFilteredMovies(movie);
     }
