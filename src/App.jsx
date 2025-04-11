@@ -20,14 +20,16 @@ function App() {
   const addMovie = event => {
     event.preventDefault();
     if (newMovie !== '') {
-      const newId = movie.length > 0 ? filteredMovies.at(-1)?.id + 1 : 1;
+      const newId = movie.length > 0 ? movie.at(-1)?.id + 1 : 1;
       const newMovies = {
         id: newId,
         title: newMovie,
         genre: newCategory
       }
       let addedMovie = [...movie, newMovies]
+      setMovie(addedMovie);
       setFilteredMovies(addedMovie);
+      console.log(addedMovie)
     }
   }
 
