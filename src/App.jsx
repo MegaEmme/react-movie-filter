@@ -41,7 +41,7 @@ function App() {
     if (searchTitle !== '') {
       let checked = [];
       movieArray.forEach(element => {
-        if (element.title.includes(searchTitle)) {
+        if (element.title.toLocaleLowerCase().includes(searchTitle)) {
           checked.push(element)
         }
       })
